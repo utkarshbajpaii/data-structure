@@ -10,35 +10,21 @@
  */
 class Solution {
     public ListNode doubleIt(ListNode head) {
-        head=reverseList(head);
-        ListNode prev=null;
-        ListNode curr=head;
-        int carry=0;
-        while(curr!=null){
-            int newVal=curr.val*2+carry;
-            curr.val=newVal%10;
-            if(newVal>=10){
-                carry=1;
-            }
-            else{
-                carry=0;
-            }
-            prev=curr;
-            curr=curr.next;
+        int lastCarry=list(head);
+        if(lastCarry>0){
+            ListNode newNode=new ListNode(lastCarry);
+            newNode.next=head;
+            return newNode;
         }
-        if(carry!=0){
-            ListNode newNode=new ListNode(carry);
-            prev.next=newNode;
-        }
-        return reverseList(head);
+       return head; 
     }
-    public ListNode reverseList(ListNode head){
-        if(head==null||head.next==null){
-            return head;
+    int list(ListNode head){
+        if(head==null){
+            return 0;
         }
-        ListNode last=reverseList(head.next);
-        head.next.next=head;
-        head.next=null;
-        return last;
+        int carry=list(head.next);
+        int newVal=(head.val)*2+carry;
+        head.val=newVal%10;
+        return newVal/10;
     }
 }
