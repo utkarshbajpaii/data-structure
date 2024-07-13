@@ -8,7 +8,7 @@ class Solution {
         Collections.sort(robots,(a,b)->Integer.compare(a[0],b[0]));
         Stack<int[]> stack=new Stack<>();
         for(int[] robot:robots){
-            if(robot[2]=='R'||stack.isEmpty()||stack.peek()[2]=='L'){
+            if(robot[2]=='R'||stack.isEmpty()){
                 stack.push(robot);
                 continue;
             }
